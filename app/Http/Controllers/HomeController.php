@@ -45,6 +45,7 @@ class HomeController extends Controller
         $transactionData = $this->reporter->getReport(new TransactionsReport, $this->date);
         $commissionData  = $this->reporter->getReport(new CommissionReport, $this->date);
         $revenueData     = $this->reporter->getReport(new RevenueReport, $this->date);
+        var_dump($transactionData);
         return view('/home')->with('reportData', array('TransactionData'=>$transactionData, 'CommissionData' =>$commissionData, 'RevenueData'=>$revenueData));
     }
 }

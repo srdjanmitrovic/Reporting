@@ -12,7 +12,6 @@ class Reporter
      */
     public function getReport(ReportInterface $report, $date)
     {
-        $daily   = $report->generateReport($date);
-        return $daily;
+        return $report->generateReport($date);
     }
 }

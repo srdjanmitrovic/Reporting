@@ -67,7 +67,7 @@ class TransactionsReport extends Model implements ReportInterface
     public function getDaily()
     {
         foreach ($this->metrics as $metric) {
-            $totalNumberOfDailyTransactions = DB::table('transactions')->whereBetween('date', array(
+            $totalNumberOfDailyTransactions[$metric] = DB::table('transactions')->whereBetween('date', array(
                 '2016-' . $this->month . '-' . $this->day . ' 00:00:00',
                 '2016-' . $this->month . '-' . $this->day . ' 23:59:59'
             ))->$metric();
@@ -83,7 +83,7 @@ class TransactionsReport extends Model implements ReportInterface
     public function getMonthly()
     {
         foreach ($this->metrics as $metric) {
-            $totalNumberOfMonthlyTransactions = DB::table('transactions')->whereBetween('date', array(
+            $totalNumberOfMonthlyTransactions[$metric] = DB::table('transactions')->whereBetween('date', array(
                 '2016-' . $this->month . '-01 00:00:00',
                 '2016-' . $this->month . '-30 23:59:59'
             ))->$metric();

@@ -23,14 +23,14 @@
                         <tbody>
                             <tr>
                             <th>Day</th>
-                                <td>{{$reportData['TransactionData']['day']}}</td>
+                                <td>{{$reportData['TransactionData']['day']['count']}}</td>
                                 <td>{{$reportData['RevenueData']['day']['sum']}}</td>
                                 <td>{{$reportData['CommissionData']['day']['sum']}}</td>
                                 <td>{{$reportData['RevenueData']['day']['avg']}}</td>
                             </tr>
                             <tr>
                             <th>Month</th>
-                                <td>{{$reportData['TransactionData']['month']}}</td>
+                                <td>{{$reportData['TransactionData']['month']['count']}}</td>
                                 <td>{{$reportData['RevenueData']['month']['sum']}}</td>
                                 <td>{{$reportData['CommissionData']['month']['sum']}}</td>
                                 <td>{{$reportData['RevenueData']['month']['avg']}}</td>
