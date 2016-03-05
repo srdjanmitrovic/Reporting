@@ -1,0 +1,50 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use DB;
+use App\Http\Requests;
+use App\DateProcessor;
+use App\Reporting\Reporter;
+use Illuminate\Http\Request;
+use App\Reporting\RevenueReport;
+use App\Reporting\CommissionReport;
+use App\Reporting\TransactionsReport;
+
+class HomeController extends Controller
+{
+    /**
+     * Date of transaction data.
+     * 
+     * @var int
+     */
+    private $date;
+    
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct(Request $request, Reporter $reporter, DateProcessor $dateProcessor)
+    {
+        $this->middleware('auth');
+        $this->date     = $dateProcessor->validate(array(
+            'day' => $request->day,
+            'month' => $request->month
+        ));
+        $this->reporter = $reporter;
+    }
+    
+    /**
+     * Show application dashboard with acquired reporting data.
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $transactionData = $this->reporter->getReport(new TransactionsReport, $this->date);
+        $commissionData  = $this->reporter->getReport(new CommissionReport, $this->date);
+        $revenueData     = $this->reporter->getReport(new RevenueReport, $this->date);
+        return view('/home')->with('reportData', array('TransactionData'=>$transactionData, 'CommissionData' =>$commissionData, 'RevenueData'=>$revenueData));
+    }
+}
