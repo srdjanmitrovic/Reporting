@@ -28,12 +28,11 @@ class HomeController extends Controller
     public function __construct(Request $request, Reporter $reporter, DateProcessor $dateProcessor)
     {
         $this->middleware('auth');
-        $this->date     = $dateProcessor->validate(array(
+        $this->date     = $dateProcessor->process(array(
             'day' => $request->day,
             'month' => $request->month
-        ));
+        ), $request->useDate);
         $this->reporter = $reporter;
-        var_dump($request->useDate);
     }
     
     /**

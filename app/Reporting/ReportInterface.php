@@ -4,7 +4,7 @@ namespace App\Reporting;
 
 interface ReportInterface
 {
-    function getDaily($day);
-    function getMonthly($month);
-    function getYearly($year);
+    function getDaily();
+    function getMonthly();
+    function getYearly();
 }

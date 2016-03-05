@@ -1,0 +1,6 @@
+suites:
+  reporting_suite:
+    namespace: App
+    src_path: App
+    spec_path: App\tests\specs
+    spec_prefix: spec

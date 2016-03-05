@@ -20,41 +20,82 @@ class CommissionReport extends Model implements ReportInterface
     private $metrics = array('sum');
 
     /**
-     * @param  int $day
+     * Day of report.
+     *
+     * @var string $day
+     */
+    private $day;
+    
+    /**
+     * Month of report.
+     *
+     * @var string $month
+     */
+    private $month;
+    
+    /**
+     * Year of report.
+     *
+     * @var string $year
+     */
+    private $year;
+
+    /**
+     * Generate complete commission report.
+     * 
+     * @param  array
+     * @return array
+     */
+    public function generateReport($date)
+    {
+        $this->day   = $date['day'];
+        $this->month = $date['month'];
+        return array(
+            'day' => $this->getDaily(),
+            'month' => $this->getMonthly(),
+            'year' => $this->getYearly()
+        );
+    }
+
+    /**
+     * Get commission data for given day.
+     * 
      * @return int
      */
-    public function getDaily($day)
+    public function getDaily()
     {
         foreach($this->metrics as $metric){
             $dailyCommission[$metric] = DB::table('transactions')->whereBetween('date', array(
-                '2016-02-' . $day . ' 00:00:00',
-                '2016-02-' . $day . ' 23:59:59'
+                '2016-' . $this->month . '-' . $this->day . ' 00:00:00',
+                '2016-' . $this->month . '-' . $this->day . ' 23:59:59'
             ))->$metric('commission');
         }
         return $dailyCommission;
     }
     
     /**
-     * @param  int $month
+     * Get commission data for given month.
+     * 
      * @return int
      */
-    public function getMonthly($month)
+    public function getMonthly()
     {
         foreach($this->metrics as $metric){
             $monthlyCommission[$metric] = DB::table('transactions')->whereBetween('date', array(
-                '2016-' . $month . '-01 00:00:00',
-                '2016-' . $month . '-30 23:59:59'
+                '2016-' . $this->month . '-01 00:00:00',
+                '2016-' . $this->month . '-30 23:59:59'
             ))->$metric('commission');
         }
         return $monthlyCommission;
     }
     
     /**
-     * @param  int $year
-     * @return int
+     * Get commission data for given year.
+     * 
+     * @return string
      */
-    public function getYearly($year)
+    public function getYearly()
     {
-        return $year;
+        return '2016';
     }
 }
