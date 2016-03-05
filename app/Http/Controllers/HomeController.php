@@ -13,7 +13,7 @@ use App\Reporting\TransactionsReport;
 
 class HomeController extends Controller
 {
-    /**
+    /** 
      * Date of transaction data.
      * 
      * @var int
@@ -33,6 +33,7 @@ class HomeController extends Controller
             'month' => $request->month
         ));
         $this->reporter = $reporter;
+        var_dump($request->useDate);
     }
     
     /**

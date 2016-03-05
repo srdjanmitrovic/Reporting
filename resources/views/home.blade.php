@@ -14,7 +14,7 @@
                 <table class="table table-striped" style="margin-top:20px">
                     <thead>
                         <tr>
-                            <th>Range</th>
+                            <th></th>
                             <th>Number of Transactions</th>
                             <th>Total Revenue</th>
                             <th>Total Commission</th>
@@ -25,7 +25,7 @@
                             <th>Day</th>
                                 <td>{{$reportData['TransactionData']['day']}}</td>
                                 <td>{{$reportData['RevenueData']['day']['sum']}}</td>
-                                <td>{{$reportData['RevenueData']['day']['avg']}}</td>
+                                <td>{{$reportData['CommissionData']['day']['sum']}}</td>
                                 <td>{{$reportData['RevenueData']['day']['avg']}}</td>
                             </tr>
                             <tr>
