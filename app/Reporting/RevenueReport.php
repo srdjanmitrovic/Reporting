@@ -5,44 +5,49 @@ namespace App\Reporting;
 use DB;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Used to generate the revenue statistics based on the relative metrics
+ */
 class RevenueReport extends Model implements ReportInterface
 {
-    
+
     /**
-     * Set timestamps to False (True by default). 
+     * Set timestamps to False (True by default).
      * @var boolean
      */
     public $timestamps = False;
 
     /**
-     * 
+     * Specify respective sql functions to be used a statistics metrics.
+     *
+     * @var array 
      */
     private $metrics = array('sum', 'avg');
 
     /**
      * Day of report.
      *
-     * @var string $day
+     * @var string 
      */
     private $day;
-    
+
     /**
      * Month of report.
      *
-     * @var string $month
+     * @var string 
      */
     private $month;
-    
+
     /**
      * Year of report.
      *
-     * @var string $year
+     * @var string 
      */
     private $year;
 
     /**
      * Generate complete revenue report.
-     * 
+     *
      * @param  array
      * @return array
      */
@@ -59,7 +64,7 @@ class RevenueReport extends Model implements ReportInterface
 
     /**
      * Get revenue data for given year.
-     * 
+     *
      * @return int
      */
     public function getDaily()
@@ -72,10 +77,10 @@ class RevenueReport extends Model implements ReportInterface
         }
         return $dailyRevenue;
     }
-    
+
     /**
      * Get revenue data for given month.
-     * 
+     *
      * @return int
      */
     public function getMonthly()
@@ -88,10 +93,10 @@ class RevenueReport extends Model implements ReportInterface
         }
         return $monthlyRevenue;
     }
-    
+
     /**
      * Get revenue data for given year.
-     * 
+     *
      * @return string
      */
     public function getYearly()

@@ -2,18 +2,22 @@
 
 namespace App;
 
+/**
+ * Used to generate the revenue statistics based on the relative metrics
+ */
 class DateProcessor
 {
- /**
-	 * User provided date.
-	 * 
-	 * @var array
-	 */
+
+    /**
+     * Date of transaction data.
+     *
+     * @var array
+     */
 	private $date;
 
     /**
      * Validate user provided date.
-     * 
+     *
      * @param  array $date
      */
     public function validate()
@@ -35,8 +39,8 @@ class DateProcessor
 
     /**
      * Process user provided date.
-     * 
-     * @param  array $this->date 
+     *
+     * @param  array $this->date
      * @param  array $useDate
      * @return array
      */
@@ -51,5 +55,5 @@ class DateProcessor
         }
         return $this->date;
     }
-    
+
 }

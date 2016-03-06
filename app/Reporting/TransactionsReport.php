@@ -5,36 +5,39 @@ namespace App\Reporting;
 use DB;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Used to generate the transaction statistics based on the relative metrics
+ */
 class TransactionsReport extends Model implements ReportInterface
 {
-    
+
     /**
-     * Set timestamps to False (True by default). 
+     * Set timestamps to False (True by default).
      * @var boolean
      */
     public $timestamps = False;
-    
+
     /**
-     * Report metrics.
-     * 
-     * @var array $metrics
+     * Specify respective sql functions to be used a statistics metrics.
+     *
+     * @var array 
      */
     private $metrics = array('count');
-    
+
     /**
      * Day of report.
      *
-     * @var string $day
+     * @var string 
      */
     private $day;
-    
+
     /**
      * Month of report.
      *
-     * @var string $month
+     * @var string 
      */
     private $month;
-    
+
     /**
      * Year of report.
      *
@@ -44,7 +47,7 @@ class TransactionsReport extends Model implements ReportInterface
 
     /**
      * Generate complete transaction report.
-     * 
+     *
      * @param  array
      * @return array
      */
@@ -58,10 +61,10 @@ class TransactionsReport extends Model implements ReportInterface
             'year' => $this->getYearly()
         );
     }
-    
+
     /**
      * Get transaction data for given day.
-     * 
+     *
      * @return int
      */
     public function getDaily()
@@ -74,10 +77,10 @@ class TransactionsReport extends Model implements ReportInterface
         }
         return $totalNumberOfDailyTransactions;
     }
-    
+
     /**
      * Get transaction data for given month.
-     * 
+     *
      * @return int
      */
     public function getMonthly()
@@ -90,10 +93,10 @@ class TransactionsReport extends Model implements ReportInterface
         }
         return $totalNumberOfMonthlyTransactions;
     }
-    
+
     /**
      * Get transaction data for given year.
-     * 
+     *
      * @return string
      */
     public function getYearly()
