@@ -9,8 +9,6 @@ use Illuminate\Database\Eloquent\Model;
 * Used to generate the commission statistics based on the relative metrics.
 */
 
-
-
 class CommissionReport extends Model implements ReportInterface
 {
     /**
@@ -20,7 +18,7 @@ class CommissionReport extends Model implements ReportInterface
     public $timestamps = False;
 
     /**
-     * Specify respective sql functions to be used a statistics metrics.
+     * Specify respective sql functions to be used as statistics metrics.
      *
      * @var array $metrics
      */

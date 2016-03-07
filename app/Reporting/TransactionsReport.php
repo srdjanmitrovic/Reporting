@@ -18,7 +18,7 @@ class TransactionsReport extends Model implements ReportInterface
     public $timestamps = False;
 
     /**
-     * Specify respective sql functions to be used a statistics metrics.
+     * Specify respective sql functions to be used as statistics metrics.
      *
      * @var array 
      */
