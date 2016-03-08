@@ -3,7 +3,7 @@
 try{
 $pdo = new PDO('mysql:host=127.0.0.1;dbname=production', 'root', '');
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$transaction = 200911008;
+$transaction = 200911900;
 	while($i < 1){
 		$query = $pdo->prepare('SELECT * FROM production.transaction_spool WHERE id > :transaction LIMIT 1;');
 		$query->execute(array(':transaction' => $transaction));
