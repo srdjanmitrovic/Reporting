@@ -1,0 +1,1 @@
+1. Going to run historical aggregation.2. Running recent transaction aggregation.3. Testing on a brand new day.4. Testing two5. Complete recent transaction aggregation, please verify.done
