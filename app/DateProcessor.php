@@ -18,7 +18,7 @@ class DateProcessor
     /**
      * Validate user provided date.
      *
-     * @param  array $date
+     * @param  array
      */
     public function validate()
     {
@@ -27,11 +27,11 @@ class DateProcessor
             switch ($key) {
                 case ('day'):
                     if ($value == 0 || $value > 31)
-                        $this->date[$key] = \DateTime::createFromFormat('Y-m-d', date('Y-m-d'))->format('d');
+                        $this->date[$key] = date('d');
                     break;
                 case ('month'):
                     if ($value == 0 || $value > 12)
-                        $this->date[$key] = \DateTime::createFromFormat('Y-m-d', date('Y-m-d'))->format('m');
+                        $this->date[$key] = date('m');
                     break;
             }
         }
@@ -48,8 +48,8 @@ class DateProcessor
     {
     	$this->date = $date;
     	if ($useDate == NULL) {
-            $this->date['day']   = \DateTime::createFromFormat('Y-m-d', date('Y-m-d'))->format('d');
-            $this->date['month'] = \DateTime::createFromFormat('Y-m-d', date('Y-m-d'))->format('m');
+            $this->date['day']   = date('d');
+            $this->date['month'] = date('m');
         }else{
         	$this->validate();
         }

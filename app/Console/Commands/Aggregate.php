@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\Dispatcher;
+use App\Aggregation\Dispatcher;
 
 class Aggregate extends Command
 {
@@ -12,7 +12,7 @@ class Aggregate extends Command
      *
      * @var string
      */
-    protected $signature = 'aggregator:aggregate';
+    protected $signature = 'transactions:aggregate';
 
     /**
      * The console command description.
@@ -33,7 +33,7 @@ class Aggregate extends Command
      *
      * @return void
      */
-    public function __construct(Dispatcher $dispathcer)
+    public function __construct(Dispatcher $dispatcher)
     {
         $this->dispatcher = $dispatcher;
         parent::__construct();

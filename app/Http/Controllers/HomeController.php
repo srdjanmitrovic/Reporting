@@ -46,6 +46,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        var_dump($this->date);
         $transactionData = $this->reporter->getReport(new TransactionsReport, $this->date);
         $commissionData  = $this->reporter->getReport(new CommissionReport, $this->date);
         $revenueData     = $this->reporter->getReport(new RevenueReport, $this->date);

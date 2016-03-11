@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 /**
 * Used to generate the commission statistics based on the relative metrics.
 */
-
 class CommissionReport extends Model implements ReportInterface
 {
     /**
@@ -18,9 +17,16 @@ class CommissionReport extends Model implements ReportInterface
     public $timestamps = False;
 
     /**
+     * SQL table containing aggregated transaction results.
+     * 
+     * @var string
+     */
+    private $aggregated_transactions_table = 'transaction_aggregation';
+
+    /**
      * Specify respective sql functions to be used as statistics metrics.
      *
-     * @var array $metrics
+     * @var array
      */
     private $metrics = array('sum');
 
@@ -70,7 +76,7 @@ class CommissionReport extends Model implements ReportInterface
     public function getDaily()
     {
         foreach($this->metrics as $metric){
-            $dailyCommission[$metric] = DB::table('transactions')->whereBetween('date', array(
+            $dailyCommission[$metric] = DB::table($aggregated_transactions_table)->whereBetween('date', array(
                 '2016-' . $this->month . '-' . $this->day . ' 00:00:00',
                 '2016-' . $this->month . '-' . $this->day . ' 23:59:59'
             ))->$metric('commission');
@@ -86,7 +92,7 @@ class CommissionReport extends Model implements ReportInterface
     public function getMonthly()
     {
         foreach($this->metrics as $metric){
-            $monthlyCommission[$metric] = DB::table('transactions')->whereBetween('date', array(
+            $monthlyCommission[$metric] = DB::table($aggregated_transactions_table)->whereBetween('date', array(
                 '2016-' . $this->month . '-01 00:00:00',
                 '2016-' . $this->month . '-30 23:59:59'
             ))->$metric('commission');

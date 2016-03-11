@@ -12,7 +12,7 @@ class ProcessTransactionHistory extends Command
      *
      * @var string
      */
-    protected $signature = 'aggregator:update';
+    protected $signature = 'transactions:update';
 
     /**
      * The console command description.

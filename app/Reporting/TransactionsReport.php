@@ -18,6 +18,13 @@ class TransactionsReport extends Model implements ReportInterface
     public $timestamps = False;
 
     /**
+     * SQL table containing aggregated transaction results.
+     * 
+     * @var string
+     */
+    private $aggregated_transactions_table = 'transaction_aggregation';
+
+    /**
      * Specify respective sql functions to be used as statistics metrics.
      *
      * @var array 
@@ -41,7 +48,7 @@ class TransactionsReport extends Model implements ReportInterface
     /**
      * Year of report.
      *
-     * @var string $year
+     * @var string
      */
     private $year;
 
@@ -70,7 +77,7 @@ class TransactionsReport extends Model implements ReportInterface
     public function getDaily()
     {
         foreach ($this->metrics as $metric) {
-            $totalNumberOfDailyTransactions[$metric] = DB::table('transactions')->whereBetween('date', array(
+            $totalNumberOfDailyTransactions[$metric] = DB::table($aggregated_transactions_table)->whereBetween('date', array(
                 '2016-' . $this->month . '-' . $this->day . ' 00:00:00',
                 '2016-' . $this->month . '-' . $this->day . ' 23:59:59'
             ))->$metric();
@@ -86,7 +93,7 @@ class TransactionsReport extends Model implements ReportInterface
     public function getMonthly()
     {
         foreach ($this->metrics as $metric) {
-            $totalNumberOfMonthlyTransactions[$metric] = DB::table('transactions')->whereBetween('date', array(
+            $totalNumberOfMonthlyTransactions[$metric] = DB::table($aggregated_transactions_table)->whereBetween('date', array(
                 '2016-' . $this->month . '-01 00:00:00',
                 '2016-' . $this->month . '-30 23:59:59'
             ))->$metric();

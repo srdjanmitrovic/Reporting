@@ -14,7 +14,6 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Commands\Inspire::class,
         Commands\Aggregate::class,
         Commands\ProcessTransactionHistory::class,
     ];
@@ -28,16 +27,8 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->call(function(){
-            $date = explode('-', date('Y-m-d'));
-            DB::table('transaction_aggregation')->insert([  'month'=> $date[1] ,
-                                                            'day'=>$date[2], 
-                                                            'last_transaction_id'=>0, 
-                                                            'commission_average'=>0, 
-                                                            'commission_sum'=>0,
-                                                            'sale_average'=>0, 
-                                                            'sale_sum'=>0]); 
-            DB::table('transaction_aggregation')->insert([  'month'=> $date[1] ,
-                                                            'day'=>0, 
+            DB::table('transaction_aggregation')->insert([  'month'=> date('m') ,
+                                                            'day'=>date('d'), 
                                                             'last_transaction_id'=>0, 
                                                             'commission_average'=>0, 
                                                             'commission_sum'=>0,
@@ -45,6 +36,6 @@ class Kernel extends ConsoleKernel
                                                             'sale_sum'=>0]); 
         })->everyMinute();
         
-        $schedule->command('aggregator:aggregate')->appendOutputTo('transaction_aggregation.log');
-        }
+        $schedule->command('transactions:aggregate')->appendOutputTo('transaction_aggregation.log');
+    }
 }
