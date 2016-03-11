@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\AggregationDispatcher;
+use App\Dispatcher;
 
 class Aggregate extends Command
 {
@@ -12,7 +12,7 @@ class Aggregate extends Command
      *
      * @var string
      */
-    protected $signature = 'amazon:update';
+    protected $signature = 'aggregator:aggregate';
 
     /**
      * The console command description.
@@ -21,16 +21,21 @@ class Aggregate extends Command
      */
     protected $description = 'Command description';
 
-    public $aggregation;
+    /**
+     * Used to dispatch transaction processing events.
+     * 
+     * @var Dispatcher
+     */
+    private $dispatcher;
 
     /**
      * Create a new command instance.
      *
      * @return void
      */
-    public function __construct(AggregationDispatcher $aggregation)
+    public function __construct(Dispatcher $dispathcer)
     {
-        $this->aggregation = $aggregation;
+        $this->dispatcher = $dispatcher;
         parent::__construct();
     }
 
@@ -41,7 +46,6 @@ class Aggregate extends Command
      */
     public function handle()
     {  
-        $this->aggregation->dispatch();
-        $this->info('done');
+        $this->dispatcher->dispatch();
     }
 }
