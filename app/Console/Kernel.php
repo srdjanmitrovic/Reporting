@@ -14,7 +14,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Commands\Aggregate::class,
+        Commands\AggregateTransactions::class,
         Commands\ProcessTransactionHistory::class,
     ];
 
