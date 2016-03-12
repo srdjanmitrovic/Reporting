@@ -76,12 +76,7 @@ class RevenueReport extends Model implements ReportInterface
      */
     public function getDaily()
     {
-        foreach($this->metrics as $metric){
-            $dailyRevenue[$metric] = DB::table($aggregated_transactions_table)->whereBetween('date', array(
-                '2016-' . $this->month . '-' . $this->day . ' 00:00:00',
-                '2016-' . $this->month . '-' . $this->day . ' 23:59:59'
-            ))->$metric('sale_amount');
-        }
+       $dailyRevenue['sum'] = DB::table($this->aggregated_transactions_table)->select('sale_sum')->where('month','=',$this->month)->where('day','=',$this->day)->get();
         return $dailyRevenue;
     }
 
@@ -92,12 +87,10 @@ class RevenueReport extends Model implements ReportInterface
      */
     public function getMonthly()
     {
-        foreach($this->metrics as $metric){
-            $monthlyRevenue[$metric] = DB::table($aggregated_transactions_table)->whereBetween('date', array(
-                '2016-' . $this->month . '-01 00:00:00',
-                '2016-' . $this->month . '-30 23:59:59'
-            ))->$metric('sale_amount');
-        }
+        $monthlyRevenue['sum'] = DB::table($this->aggregated_transactions_table)->where('month', '=', $this->month)->whereBetween('day', array(
+            1,
+            $this->day
+        ))->sum('sale_sum');
         return $monthlyRevenue;
     }
 

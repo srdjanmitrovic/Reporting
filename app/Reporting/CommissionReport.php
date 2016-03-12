@@ -75,12 +75,7 @@ class CommissionReport extends Model implements ReportInterface
      */
     public function getDaily()
     {
-        foreach($this->metrics as $metric){
-            $dailyCommission[$metric] = DB::table($aggregated_transactions_table)->whereBetween('date', array(
-                '2016-' . $this->month . '-' . $this->day . ' 00:00:00',
-                '2016-' . $this->month . '-' . $this->day . ' 23:59:59'
-            ))->$metric('commission');
-        }
+        $dailyCommission['sum'] = DB::table($this->aggregated_transactions_table)->select('commission_sum')->where('month','=',$this->month)->where('day','=',$this->day)->get();
         return $dailyCommission;
     }
 
@@ -91,12 +86,10 @@ class CommissionReport extends Model implements ReportInterface
      */
     public function getMonthly()
     {
-        foreach($this->metrics as $metric){
-            $monthlyCommission[$metric] = DB::table($aggregated_transactions_table)->whereBetween('date', array(
-                '2016-' . $this->month . '-01 00:00:00',
-                '2016-' . $this->month . '-30 23:59:59'
-            ))->$metric('commission');
-        }
+        $monthlyCommission['sum'] = DB::table($this->aggregated_transactions_table)->where('month', '=', $this->month)->whereBetween('day', array(
+            1,
+            $this->day
+        ))->sum('commission_sum');
         return $monthlyCommission;
     }
 

@@ -63,9 +63,9 @@ class TransactionsReport extends Model implements ReportInterface
         $this->day   = $date['day'];
         $this->month = $date['month'];
         return array(
-            'day' => $this->getDaily(),
-            'month' => $this->getMonthly(),
-            'year' => $this->getYearly()
+            'day' => $this->getDailyTransactionStatistics(),
+            'month' => $this->getMonthlyTransactionStatistics(),
+            'year' => $this->getYearlyTransactionStatistics()
         );
     }
 
@@ -74,14 +74,9 @@ class TransactionsReport extends Model implements ReportInterface
      *
      * @return int
      */
-    public function getDaily()
+    public function getDailyTransactionStatistics()
     {
-        foreach ($this->metrics as $metric) {
-            $totalNumberOfDailyTransactions[$metric] = DB::table($aggregated_transactions_table)->whereBetween('date', array(
-                '2016-' . $this->month . '-' . $this->day . ' 00:00:00',
-                '2016-' . $this->month . '-' . $this->day . ' 23:59:59'
-            ))->$metric();
-        }
+        $totalNumberOfDailyTransactions['count'] = DB::table($this->aggregated_transactions_table)->select('transaction_count')->where('month','=',$this->month)->where('day','=',$this->day)->get();
         return $totalNumberOfDailyTransactions;
     }
 
@@ -90,14 +85,12 @@ class TransactionsReport extends Model implements ReportInterface
      *
      * @return int
      */
-    public function getMonthly()
+    public function getMonthlyTransactionStatistics()
     {
-        foreach ($this->metrics as $metric) {
-            $totalNumberOfMonthlyTransactions[$metric] = DB::table($aggregated_transactions_table)->whereBetween('date', array(
-                '2016-' . $this->month . '-01 00:00:00',
-                '2016-' . $this->month . '-30 23:59:59'
-            ))->$metric();
-        }
+        $totalNumberOfMonthlyTransactions['count'] = DB::table($this->aggregated_transactions_table)->where('month', '=', $this->month)->whereBetween('day', array(
+            1,
+            $this->day
+        ))->sum('transaction_count');
         return $totalNumberOfMonthlyTransactions;
     }
 
@@ -106,7 +99,7 @@ class TransactionsReport extends Model implements ReportInterface
      *
      * @return string
      */
-    public function getYearly()
+    public function getYearlyTransactionStatistics()
     {
         return '2016';
     }
