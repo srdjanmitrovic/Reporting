@@ -42,7 +42,7 @@ class ReportAggregator
 	 * @param  array $values 
 	 * @return array
 	 */
-	public function aggregateDailyValues($values)
+	public function aggregateMultipleColumns($values)
 	{
 		foreach($values as $key=>$value){
 			if(empty($value)){
@@ -52,5 +52,16 @@ class ReportAggregator
 			}
 		}
 		return $values;
+	}
+
+	/**
+	 * Parse values based on stdClass parameters.
+	 * 
+	 * @param  array $values 
+	 * @return array
+	 */
+	public function aggregateSingleColumn($values)
+	{
+		return array('top_affiliates'=>$values);
 	}
 }

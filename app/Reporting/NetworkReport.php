@@ -9,7 +9,7 @@ class NetworkReport
 	 * 
 	 * @var RepositoryInterface
 	 */
-	private $repository;
+	private $factory;
 
 	/**
 	 * Aggregator instance.
@@ -24,9 +24,9 @@ class NetworkReport
 	 * @param RepositoryInterface $transactionRepository 
 	 * @param ReportAggregator    $aggregator           
 	 */
-	function __construct(RepositoryInterface $transactionRepository, ReportAggregator $aggregator)
+	function __construct(RepositoryFactory $factory, ReportAggregator $aggregator)
 	{
-		$this->repository = $transactionRepository;
+		$this->factory = $factory;
 		$this->aggregator = $aggregator;
 	}
 
@@ -38,15 +38,20 @@ class NetworkReport
 	 */
 	public function getReport($date)
 	{
-		
-		// $this->repository->setDate($date);
+		$affiliateRepository = $this->factory->getRepository('affiliate');
+		$transactionRepository = $this->factory->getRepository('transaction', $date);
 
-		// $dailyStatistics = $this->repository->getDailyStatistics();
-		// $monthlyStatistics = $this->repository->getMonthlyStatistics();
+		$dailyStatistics = $transactionRepository->getDailyStatistics();
+		$monthlyStatistics = $transactionRepository->getMonthlyStatistics();
 
-		// $dailyStatistics = $this->aggregator->aggregateDailyValues($dailyStatistics);
-		// $averageMonthlyStatistics = $this->aggregator->aggregateAverage($monthlyStatistics);
+		$dailyStatistics = $this->aggregator->aggregateMultipleColumns($dailyStatistics);
+		$monthlyStatistics = $this->aggregator->aggregateAverage($monthlyStatistics);
 
-		return array('monthly' => $averageMonthlyStatistics, 'daily' => $dailyStatistics);
+		$affiliateRepository->setLimit(5);
+		$monthlyAffiliateStatistics = $affiliateRepository->getMonthlyStatistics();
+		$monthlyAffiliateStatistics = $this->aggregator->aggregateSingleColumn($monthlyAffiliateStatistics);
+		$monthlyStatistics = array_merge($monthlyAffiliateStatistics, $monthlyStatistics);
+
+		return array('monthly' => $monthlyStatistics, 'daily' => $dailyStatistics);
 	}
 }

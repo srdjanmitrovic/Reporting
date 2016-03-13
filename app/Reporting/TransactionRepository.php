@@ -21,7 +21,7 @@ class TransactionRepository implements RepositoryInterface
      * 
      * @var string
      */
-    private $aggregated_transactions_table = 'transaction_aggregation';
+    private $aggregated_table = 'transaction_aggregation';
 
     /**
      * Specify respective sql functions to be used as statistics metrics.
@@ -37,7 +37,12 @@ class TransactionRepository implements RepositoryInterface
      */
     private $date;
 
-    public function setDate($date)
+    /**
+     * Create new instance of the TransactionRepository.
+     * 
+     * @param array $date
+     */
+    public function __construct($date)
     {
         $this->date = $date;
     }
@@ -45,12 +50,12 @@ class TransactionRepository implements RepositoryInterface
     /**
      * Get transaction data for given day.
      *
-     * @return int
+     * @return array
      */
     public function getDailyStatistics()
     {
         foreach($this->columns['daily'] as $column){
-            $totalNumberOfDailyTransactions[$column] = DB::table($this->aggregated_transactions_table)->select($column)->where('day','=',$this->date['day'])->where('month','=', $this->date['month'])->get();
+            $totalNumberOfDailyTransactions[$column] = DB::table($this->aggregated_table)->select($column)->where('day','=',$this->date['day'])->where('month','=', $this->date['month'])->get();
         }
         return $totalNumberOfDailyTransactions;
     }
@@ -58,12 +63,12 @@ class TransactionRepository implements RepositoryInterface
     /**
      * Get transaction data for given month.
      *
-     * @return int
+     * @return array
      */
     public function getMonthlyStatistics()
     {
         foreach($this->columns['monthly'] as $column){
-            $totalNumberOfMonthlyTransactions[$column] = DB::table($this->aggregated_transactions_table)->where('month', '=', $this->date['month'])->whereBetween('day', array(1,$this->date['day']))->sum($column);
+            $totalNumberOfMonthlyTransactions[$column] = DB::table($this->aggregated_table)->where('month', '=', $this->date['month'])->whereBetween('day', array(1,$this->date['day']))->sum($column);
         }
         return $totalNumberOfMonthlyTransactions;
     }

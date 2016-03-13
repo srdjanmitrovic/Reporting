@@ -20,23 +20,45 @@
                             <th>Total Commission</th>
                             <th>Average Order Value</th>
                         </tr>
-                        <tbody>
-                            <tr>
+                    </thead>
+                    <tbody>
+                        <tr>
                             <th>{{$day}} of {{date('F')}}</th>
-                                <td>{{$reportData['daily']['transaction_count']}}</td>
-                                <td>£{{$reportData['daily']['sale_sum']}}</td>
-                                <td>£{{$reportData['daily']['commission_sum']}}</td>
-                                <td>£{{$reportData['daily']['sale_average']}}</td>
-                            </tr>
-                            <tr>
+                            <td>{{$reportData['daily']['transaction_count']}}</td>
+                            <td>£{{$reportData['daily']['sale_sum']}}</td>
+                            <td>£{{$reportData['daily']['commission_sum']}}</td>
+                            <td>£{{$reportData['daily']['sale_average']}}</td>
+                        </tr>
+                        <tr>
                             <th>{{date('F')}}</th>
-                                <td>{{$reportData['monthly']['transaction_count']}}</td>
-                                <td>£{{$reportData['monthly']['sale_sum']}}</td>
-                                <td>£{{$reportData['monthly']['commission_sum']}}</td>
-                                <td>£{{$reportData['monthly']['sale_sum_average']}}</td>
-                            </tr>
-                        </tbody>
+                            <td>{{$reportData['monthly']['transaction_count']}}</td>
+                            <td>£{{$reportData['monthly']['sale_sum']}}</td>
+                            <td>£{{$reportData['monthly']['commission_sum']}}</td>
+                            <td>£{{$reportData['monthly']['sale_sum_average']}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="table table-striped" style="margin-top:20px">
                     <thead>
+                        <tr>
+                            <th></th>
+                            <th>Id</th>
+                            <th>Site URL</th>
+                            <th>Company Name</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($reportData['monthly']['top_affiliates'] as $key=>$affiliates)
+                            @foreach ($affiliates as $affiliate)
+                        <tr>
+                            <th>{{$key+1}}</th>
+                            <td>{{$affiliate->affiliate_id}}</td>
+                            <td><a href="{{$affiliate->website}}">{{$affiliate->website}}</a></td>
+                            <td>{{$affiliate->company}}</td>
+                        </tr>
+                            @endforeach
+                        @endforeach
+                    </tbody>
                 </table>
                 </div>
             </div>
@@ -45,5 +67,4 @@
 </div>
 
 @endsection
-
 
