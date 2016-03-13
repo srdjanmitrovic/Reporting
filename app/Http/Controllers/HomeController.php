@@ -5,11 +5,8 @@ namespace App\Http\Controllers;
 use DB;
 use App\Http\Requests;
 use App\DateProcessor;
-use App\Reporting\Reporter;
 use Illuminate\Http\Request;
-use App\Reporting\RevenueReport;
-use App\Reporting\CommissionReport;
-use App\Reporting\TransactionsReport;
+use App\Reporting\NetworkReport;
 
 /**
  * Calls relative models that generate reporting statistics
@@ -29,14 +26,13 @@ class HomeController extends Controller
      *
      * @return void
      */
-    public function __construct(Request $request, Reporter $reporter, DateProcessor $dateProcessor)
+    public function __construct(Request $request, DateProcessor $dateProcessor)
     {
         $this->middleware('auth');
         $this->date     = $dateProcessor->process(array(
             'day' => $request->day,
             'month' => $request->month
         ), $request->useDate);
-        $this->reporter = $reporter;
     }
 
     /**
@@ -44,11 +40,9 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(NetworkReport $report)
     {
-        $transactionData = $this->reporter->getReport(new TransactionsReport, $this->date);
-        $commissionData  = $this->reporter->getReport(new CommissionReport, $this->date);
-        $revenueData     = $this->reporter->getReport(new RevenueReport, $this->date);
-        return view('/home')->with('reportData', array('TransactionData'=>$transactionData, 'CommissionData' =>$commissionData, 'RevenueData'=>$revenueData));
+        $reportData = $report->getReport($this->date);
+        return view('/home')->with('reportData', $reportData);
     }
 }

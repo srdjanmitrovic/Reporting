@@ -23,17 +23,17 @@
                         <tbody>
                             <tr>
                             <th>Day</th>
-                                <td>{{$reportData['TransactionData']['day']['count']}}</td>
-                                <td>£{{$reportData['RevenueData']['day']['sum']}}</td>
-                                <td>£{{$reportData['CommissionData']['day']['sum']}}</td>
-                                <td>£{{$reportData['RevenueData']['day']['avg']}}</td>
+                                <td>{{$reportData['daily']['transaction_count']}}</td>
+                                <td>£{{$reportData['daily']['sale_sum']}}</td>
+                                <td>£{{$reportData['daily']['commission_sum']}}</td>
+                                <td>£{{$reportData['daily']['sale_average']}}</td>
                             </tr>
                             <tr>
                             <th>Month</th>
-                                <td>{{$reportData['TransactionData']['month']['count']}}</td>
-                                <td>£{{$reportData['RevenueData']['month']['sum']}}</td>
-                                <td>£{{$reportData['CommissionData']['month']['sum']}}</td>
-                                <td>£{{$reportData['RevenueData']['month']['avg']}}</td>
+                                <td>{{$reportData['monthly']['transaction_count']}}</td>
+                                <td>£{{$reportData['monthly']['sale_sum']}}</td>
+                                <td>£{{$reportData['monthly']['commission_sum']}}</td>
+                                <td>£{{$reportData['monthly']['sale_sum_average']}}</td>
                             </tr>
                         </tbody>
                     <thead>

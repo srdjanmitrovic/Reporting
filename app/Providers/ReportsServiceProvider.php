@@ -8,8 +8,8 @@ class ReportsServiceProvider extends LaravelServiceProvider
     public function register()
     {
         $this->app->bind(
-            'App\ReportInterface',
-            'App\TransactionsReport'
+            'App\Reporting\RepositoryInterface',
+            'App\Reporting\TransactionRepository'
         );
     }
 }
