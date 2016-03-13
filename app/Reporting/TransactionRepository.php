@@ -28,7 +28,7 @@ class TransactionRepository implements RepositoryInterface
      *
      * @var array 
      */
-    private $columns = array('daily'=>array('transaction_count', 'commission_sum','sale_sum','sale_average','commission_average'), 'monthly'=>array('commission_sum','sale_sum'));
+    private $columns = array('daily'=>array('transaction_count', 'commission_sum','sale_sum','sale_average','commission_average'), 'monthly'=>array('transaction_count', 'commission_sum','sale_sum'));
 
     /**
      * Day of report.

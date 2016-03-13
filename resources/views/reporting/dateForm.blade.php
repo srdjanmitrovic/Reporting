@@ -1,6 +1,5 @@
 <form method="POST" action="/home">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <label ><input type="radio" name="useDate" style="margin-left:5px">Use Dates</label>
                         <label style="float:left; padding:5px">Day</label>
                         <select class="form-control" name="day" id="day" style="width:50px; float:left">
                             <option value="1">1</option>

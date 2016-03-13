@@ -20,40 +20,14 @@ class DateProcessor
      *
      * @param  array
      */
-    public function validate()
+    public function validate($date)
     {
-        foreach ($this->date as $key => $value) {
-            $value = intval($value);
-            switch ($key) {
-                case ('day'):
-                    if ($value == 0 || $value > 31)
-                        $this->date[$key] = date('d');
-                    break;
-                case ('month'):
-                    if ($value == 0 || $value > 12)
-                        $this->date[$key] = date('m');
-                    break;
-            }
+        foreach ($date as $key => $value) 
+        {
+            $value = intval($value); 
+            if ($key == 'day' && ($value == 0 || $value > 31)) $date[$key] = date('d');
+            if ($key == 'day' && ($value == 0 || $value > 12)) $date[$key] = date('m');
         }
+        return $date;
     }
-
-    /**
-     * Process user provided date.
-     *
-     * @param  array $this->date
-     * @param  array $useDate
-     * @return array
-     */
-    public function process($date, $useDate)
-    {
-    	$this->date = $date;
-    	if ($useDate == NULL) {
-            $this->date['day']   = date('d');
-            $this->date['month'] = date('m');
-        }else{
-        	$this->validate();
-        }
-        return $this->date;
-    }
-
 }

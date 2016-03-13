@@ -22,14 +22,14 @@
                         </tr>
                         <tbody>
                             <tr>
-                            <th>Day</th>
+                            <th>{{$day}} of {{date('F')}}</th>
                                 <td>{{$reportData['daily']['transaction_count']}}</td>
                                 <td>£{{$reportData['daily']['sale_sum']}}</td>
                                 <td>£{{$reportData['daily']['commission_sum']}}</td>
                                 <td>£{{$reportData['daily']['sale_average']}}</td>
                             </tr>
                             <tr>
-                            <th>Month</th>
+                            <th>{{date('F')}}</th>
                                 <td>{{$reportData['monthly']['transaction_count']}}</td>
                                 <td>£{{$reportData['monthly']['sale_sum']}}</td>
                                 <td>£{{$reportData['monthly']['commission_sum']}}</td>

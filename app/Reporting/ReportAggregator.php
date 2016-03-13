@@ -2,28 +2,46 @@
 
 namespace App\Reporting;
 
-use DB;
-
 class ReportAggregator
 {
-
-	private $transactionCount;
-
-	public function __construct()
-	{
-		$this->transaction_count = DB::table('transactions')->count();
-	}
 	
+	/**
+	 * Total transaction number.
+	 * 
+	 * @var int
+	 */
+	private $transactionCount;
+	
+	/**
+	 * Aggregate average values based on total transactions and sums on the fly.
+	 * 
+	 * @param  array $values 
+	 * @return array
+	 */
 	public function aggregateAverage($values)
 	{
+		$transaction_count = $values['transaction_count'];
+		if ($transaction_count == 0) {
+			foreach($values as $key=>$value){
+				$averageValue = 0;
+				$values[$key.'_average'] = 0; 
+			}
+			return $values;
+		}
 		foreach($values as $key=>$value){
-			$averageValue = (int)$value/$this->transaction_count;
+			$averageValue = (int)$value/$transaction_count;
 			$values[$key.'_average'] = $averageValue; 
 		}
-		$values['transaction_count'] = $this->transaction_count;
+		$values['transaction_count'] = $transaction_count;
 		return $values;
 	}
 
+	/**
+	 * Parse values based on keys and values.
+	 * 
+	 * @param  array $values 
+	 * @return array
+	 */
 	public function aggregateDailyValues($values)
 	{
 		foreach($values as $key=>$value){
