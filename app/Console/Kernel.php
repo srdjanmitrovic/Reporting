@@ -16,6 +16,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         Commands\AggregateTransactions::class,
         Commands\ProcessTransactionHistory::class,
+        Commands\AggregateAffiliatePerformance::class,
     ];
 
     /**

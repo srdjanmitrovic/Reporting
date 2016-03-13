@@ -6,5 +6,5 @@ interface RepositoryInterface
 {
 	function getDailyStatistics();
 	function getMonthlyStatistics();
-	function getYearlyTransactionStatistics();
+	function getYearlyStatistics();
 }

@@ -38,11 +38,15 @@ class NetworkReport
 	 */
 	public function getReport($date)
 	{
-		$this->repository->setDate($date);
-		$dailyStatistics = $this->repository->getDailyStatistics();
-		$monthlyStatistics = $this->repository->getMonthlyStatistics();
-		$dailyStatistics = $this->aggregator->aggregateDailyValues($dailyStatistics);
-		$averageMonthlyStatistics = $this->aggregator->aggregateAverage($monthlyStatistics);
+		
+		// $this->repository->setDate($date);
+
+		// $dailyStatistics = $this->repository->getDailyStatistics();
+		// $monthlyStatistics = $this->repository->getMonthlyStatistics();
+
+		// $dailyStatistics = $this->aggregator->aggregateDailyValues($dailyStatistics);
+		// $averageMonthlyStatistics = $this->aggregator->aggregateAverage($monthlyStatistics);
+
 		return array('monthly' => $averageMonthlyStatistics, 'daily' => $dailyStatistics);
 	}
 }

@@ -45,54 +45,57 @@ class TransactionAggregator
 
     /**
      * Last transaction id.
+     * 
      * @var id
      */
     private $last_transaction_id;
 
     /**
-     * Transaction tab;e
+     * Source  table.
+     * 
      * @var string
      */
-    private $transactions_table;
+    private $source_table;
 
     /**
-     * Logger instance.
+     * Aggregation table.
      * 
-     * @var Logger.
+     * @var string
      */
-    private $logger;
+    private $aggregation_table;
 
     /**
-     * Create a new TransactionAggregator instance.
-     * 
-     * @param Logger $logger 
-     */
-    public function __construct(Logger $logger)
-    {
-        $this->logger = $logger;
-    }
-
-    /**
-     * Set transactions table.
+     * Set table where the data will be aggregated from.
      * 
      * @param  int $month
      * @param  int $year
      * @return void
      */
-    public function setTable($month, $year)
+    public function setSourceTable($table, $month = '', $year = '')
     {
-        $this->transactions_table = 'transactions'.$year.$month;
+        $this->source_table = $table.$year.$month;
+    }
+
+    /**
+     * Set the table where the data will be stored.
+     * 
+     * @param [type] $table [description]
+     */
+    public function setAggregationTable($table, $month = '', $year = '')
+    {
+        $this->aggregation_table = $table.$year.$month;
     }
 	
     /**
      * Get new data (run at the beginning of the day).
+     * 
      * @param  int $day   
      * @param  int $month
      * @return void
      */
 	public function getNewProcessedData($day, $month)
 	{
-        $transaction_table_transactions = DB::table($this->transactions_table)->select('date', 'sale_amount', 'commission')->where('date', '>', '2016-' . $month . '-' . $day . ' 00:00:00')->get();
+        $transaction_table_transactions = DB::table($this->source_table)->select('date', 'sale_amount', 'commission')->where('date', '>', '2016-' . $month . '-' . $day . ' 00:00:00')->get();
         $this->processSums($transaction_table_transactions);   
 	}
 
@@ -104,7 +107,7 @@ class TransactionAggregator
      */
 	public function getCurrentProcessedData($transaction_id)
 	{	
-        $transaction_table_transactions = DB::table($this->transactions_table)->select('id', 'sale_amount', 'commission')->where('id', '>', $transaction_id)->get();
+        $transaction_table_transactions = DB::table($this->source_table)->select('id', 'sale_amount', 'commission')->where('id', '>', $transaction_id)->get();
         $this->processSums($transaction_table_transactions);
 	}
 
@@ -116,7 +119,7 @@ class TransactionAggregator
      */
     private function processSums($transactions)
     {
-        $this->last_transaction_id = DB::table($this->transactions_table)->select('id')->orderBy('id', 'desc')->take(1)->get()[0]->id;
+        $this->last_transaction_id = DB::table($this->source_table)->select('id')->orderBy('id', 'desc')->take(1)->get()[0]->id;
         foreach($transactions as $transaction) {
             $this->day_sale_sum += $transaction->sale_amount;
             $this->day_commission_sum += $transaction->commission;
@@ -135,6 +138,11 @@ class TransactionAggregator
         $this->day_commission_average = $this->day_commission_sum/$transaction_count;
     }
 
+    public function parseResults($transactions)
+    {
+        
+    }
+
     /**
      * Update Aggregation table with relevant data.
      * 
@@ -143,11 +151,11 @@ class TransactionAggregator
      * @return void
      */
     public function updateAggregationTable($day, $month){
-        DB::update('UPDATE production.transaction_aggregation SET last_transaction_id=' . $this->last_transaction_id  . ', commission_sum = commission_sum + ' . $this->day_commission_sum . ', sale_sum = sale_sum + ' . $this->day_sale_sum . ', transaction_count = transaction_count + ' . $this->number_of_transactions . ' WHERE month = ' . $month . ' AND day = ' . $day . ';');
+        DB::update('UPDATE ' . $this->aggregation_table . ' SET last_transaction_id=' . $this->last_transaction_id  . ', commission_sum = commission_sum + ' . $this->day_commission_sum . ', sale_sum = sale_sum + ' . $this->day_sale_sum . ', transaction_count = transaction_count + ' . $this->number_of_transactions . ' WHERE month = ' . $month . ' AND day = ' . $day . ';');
 
         $transaction_count = DB::table('transaction_aggregation')->select('transaction_count')->orderBy('id','desc')->take(1)->get();
         $this->processAverages($transaction_count[0]->transaction_count);
 
-        DB::update('UPDATE production.transaction_aggregation SET commission_average = commission_average + ' . $this->day_commission_average . ', sale_average = sale_average + ' . $this->day_sale_average . ' WHERE month = ' . $month . ' AND day = ' . $day . ';');
+        DB::update('UPDATE ' . $this->aggregation_table . ' SET commission_average = commission_average + ' . $this->day_commission_average . ', sale_average = sale_average + ' . $this->day_sale_average . ' WHERE month = ' . $month . ' AND day = ' . $day . ';');
     }
 }

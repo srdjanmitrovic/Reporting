@@ -73,7 +73,7 @@ class TransactionRepository implements RepositoryInterface
      *
      * @return string
      */
-    public function getYearlyTransactionStatistics()
+    public function getYearlyStatistics()
     {
         return '2016';
     }

@@ -4,23 +4,23 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Aggregation\Dispatcher;
-use App\Aggregation\TransactionAggregator;
+use App\Aggregation\AffiliateAggregator;
 
-class AggregateTransactions extends Command
+class AggregateAffiliatePerformance extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'transactions:aggregate';
+    protected $signature = 'affiliates:aggregate';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Used to aggregate transaction values.';
+    protected $description = 'Used to aggregate affiliate performance.';
 
     /**
      * Used to dispatch transaction processing events.
@@ -47,6 +47,6 @@ class AggregateTransactions extends Command
      */
     public function handle()
     {  
-        $this->dispatcher->dispatchTransactionAggregation(new TransactionAggregator);
+        $this->dispatcher->dispatchAffiliatePerformanceAggregation(new AffiliateAggregator);
     }
 }
