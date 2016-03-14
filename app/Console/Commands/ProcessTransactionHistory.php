@@ -28,6 +28,7 @@ class ProcessTransactionHistory extends Command
      */
     public function __construct()
     {
+        $this->source_table = 'transactions'.date('Y').date('m');
         parent::__construct();
     }
 
@@ -38,18 +39,18 @@ class ProcessTransactionHistory extends Command
      */
     public function handle()
     {
-        $date = explode('-', date('Y-m-d'));
+        $date = explode('-',date('Y-m-d'));
         DB::table('transaction_aggregation')->truncate();
         $bar = $this->output->createProgressBar($date[2]);
         for ($day = 1; $day <= ($date[2]-1); ++$day) {
 
-            $day_sale_sum = DB::select("SELECT SUM(sale_amount) AS 'sum' FROM transactions WHERE date BETWEEN '2016-" . $date[1] . "-" . $day . "' AND '2016-" . $date[1] . "-" . ($day + 1) . "'; ");
+            $day_sale_sum = DB::select("SELECT SUM(sale_amount) AS 'sum' FROM " . $this->source_table . " WHERE date BETWEEN '2016-" . $date[1] . "-" . $day . "' AND '2016-" . $date[1] . "-" . ($day + 1) . "'; ");
 
-            $day_commission_sum = DB::select("SELECT SUM(commission) AS 'commission' FROM transactions WHERE date BETWEEN '2016-" . $date[1] . "-" . $day . "' AND '2016-" . $date[1] . "-" . ($day + 1) . "'; ");
+            $day_commission_sum = DB::select("SELECT SUM(commission) AS 'commission' FROM " . $this->source_table . " WHERE date BETWEEN '2016-" . $date[1] . "-" . $day . "' AND '2016-" . $date[1] . "-" . ($day + 1) . "'; ");
 
-            $transaction_count = DB::select("SELECT COUNT(*) AS 'count' FROM transactions WHERE date BETWEEN '2016-" . $date[1] . "-" . $day . "' AND '2016-" . $date[1] . "-" . ($day + 1) . "'; ");
+            $transaction_count = DB::select("SELECT COUNT(*) AS 'count' FROM " . $this->source_table . " WHERE date BETWEEN '2016-" . $date[1] . "-" . $day . "' AND '2016-" . $date[1] . "-" . ($day + 1) . "'; ");
 
-            $last_transaction_id = DB::select("SELECT id FROM transactions WHERE date BETWEEN '2016-03-" . $day . "' AND  '2016-" . $date[1] . "-" . ($day + 1) . "' ORDER BY id DESC LIMIT 1; ");
+            $last_transaction_id = DB::select("SELECT id FROM " . $this->source_table . " WHERE date BETWEEN '2016-03-" . $day . "' AND  '2016-" . $date[1] . "-" . ($day + 1) . "' ORDER BY id DESC LIMIT 1; ");
 
             DB::table('transaction_aggregation')->insert(['month' => $date[1], 'day' => $day, 'last_transaction_id' => $last_transaction_id[0]->id, 'commission_average' => $day_commission_sum[0]->commission / $transaction_count[0]->count, 'commission_sum' => $day_commission_sum[0]->commission, 'sale_average' => $day_sale_sum[0]->sum / $transaction_count[0]->count, 'sale_sum' => $day_sale_sum[0]->sum, 'transaction_count' => $transaction_count[0]->count]);
             $bar->advance();
