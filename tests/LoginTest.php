@@ -6,6 +6,9 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 
 class LoginTest extends TestCase
 {
+
+	use DatabaseTransactions;
+
     public function testLoginPageExists()
 	{
 		$this->visit('/login')->see('Login');
@@ -16,6 +19,7 @@ class LoginTest extends TestCase
 
 	public function testLoginFormSuccess()
 	{
+		$user = factory(App\User::class)->create(['username'=>'test', 'password'=>bcrypt('test')]);
 		$this->visit('/login')->type('test', 'username')->type('test', 'password')->press('Login')->seePageIs('/home');
 
 	}
