@@ -53,7 +53,7 @@ class AffiliateAggregator implements AggregatorInterface
      * 
      * @return void
      */
-    public function rankeAffiliatesByRevenue()
+    public function rankAffiliatesByRevenue()
     {
         $this->affiliates = DB::select("SELECT SUM(sale_amount) AS 'revenue', affiliate_id FROM " . $this->source_table . " GROUP BY (affiliate_id) ORDER BY sale_amount DESC LIMIT 1000;");
     }

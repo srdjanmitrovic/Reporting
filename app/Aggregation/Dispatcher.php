@@ -64,7 +64,7 @@ class Dispatcher
     {
         $aggregator->setSourceTable('transactions', $this->date[1], $this->date[0]);
         $aggregator->setAggregationTable('affiliate_aggregation');
-        $aggregator->rankeAffiliatesByRevenue();
+        $aggregator->rankAffiliatesByRevenue();
         $aggregator->updateAggregationTable();
     }
 }
