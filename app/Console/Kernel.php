@@ -38,5 +38,6 @@ class Kernel extends ConsoleKernel
         })->cron('00 00 * * *');
         
         $schedule->command('transactions:aggregate')->appendOutputTo('transaction_aggregation.log');
+        $schedule->command('affiliates:aggregate')->appendOutputTo('transaction_aggregation.log')->everyThirtyMinutes();
     }
 }
