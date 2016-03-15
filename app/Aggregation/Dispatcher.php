@@ -15,12 +15,20 @@ class Dispatcher
     private $logger;
 
     /**
+     * Used to store the current month and day.
+     * 
+     * @var array 
+     */
+    private $date;
+
+    /**
      * Create a new Dispatcher instance.
      * 
      * @param TransactionAggregator $aggregator 
      */
     public function __construct(Logger $logger)
     {   
+        $this->date = explode('-', date('Y-m-d'));
         $this->logger = $logger;
     }
 
@@ -32,16 +40,16 @@ class Dispatcher
      */
     public function dispatchTransactionAggregation(TransactionAggregator $aggregator)
     {
-        $last_aggregated_transaction = DB::table('transaction_aggregation')->select('last_transaction_id')->where('month', '=', date('m'))->take(1)->get();
-        $aggregator->setSourceTable('transactions', date('m'), date('Y'));
+        $last_aggregated_transaction = DB::table('transaction_aggregation')->select('last_transaction_id')->where('month', '=', $this->date[1])->orderBy('id','desc')->take(1)->get();
+        $aggregator->setSourceTable('transactions', $this->date[1], $this->date[0]);
         $aggregator->setAggregationTable('transaction_aggregation');
         if ($last_aggregated_transaction[0]->last_transaction_id == 0) {
-            $aggregator->getNewProcessedData(date('d'), date('m'));
+            $aggregator->getNewProcessedData($this->date[2], $this->date[1]);
         }
         else {
             $aggregator->getCurrentProcessedData($last_aggregated_transaction[0]->last_transaction_id);
         }
-        $aggregator->updateAggregationTable(date('d'), date('m'));
+        $aggregator->updateAggregationTable($this->date[2], $this->date[1]);
         $this->logger->logMessage('Aggregated transaction data up to date');
 
     }
@@ -54,9 +62,9 @@ class Dispatcher
      */
     public function dispatchAffiliatePerformanceAggregation(AffiliateAggregator $aggregator)
     {
-        $aggregator->setSourceTable('transactions', date('m'), date('Y'));
+        $aggregator->setSourceTable('transactions', $this->date[1], $this->date[0]);
         $aggregator->setAggregationTable('affiliate_aggregation');
-        $aggregator->rankeAffiliatesByRevenue(date('d'), date('m'));
+        $aggregator->rankeAffiliatesByRevenue();
         $aggregator->updateAggregationTable();
     }
 }
