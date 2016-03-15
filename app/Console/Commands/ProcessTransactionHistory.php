@@ -41,8 +41,11 @@ class ProcessTransactionHistory extends Command
     {
         $date = explode('-',date('Y-m-d'));
         DB::table('transaction_aggregation')->truncate();
-        $bar = $this->output->createProgressBar($date[2]);
-        for ($day = 1; $day <= ($date[2]-1); ++$day) {
+        
+        $last_transaction_date = DB::table($this->source_table)->select('date')->orderBy('id','desc')->take(1)->get()[0]->date;
+        $last_transaction_date = explode('-',explode(' ',$last_transaction_date)[0]);
+        $bar = $this->output->createProgressBar($last_transaction_date[2]);
+        for ($day = 1; $day <= $last_transaction_date[2]; $day++) {
 
             $day_sale_sum = DB::select("SELECT SUM(sale_amount) AS 'sum' FROM " . $this->source_table . " WHERE date BETWEEN '2016-" . $date[1] . "-" . $day . "' AND '2016-" . $date[1] . "-" . ($day + 1) . "'; ");
 
