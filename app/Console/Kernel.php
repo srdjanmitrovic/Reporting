@@ -35,7 +35,7 @@ class Kernel extends ConsoleKernel
                                                             'commission_sum'=>0,
                                                             'sale_average'=>0, 
                                                             'sale_sum'=>0]); 
-        })->everyMinute();
+        })->cron('00 00 * * *');
         
         $schedule->command('transactions:aggregate')->appendOutputTo('transaction_aggregation.log');
     }
