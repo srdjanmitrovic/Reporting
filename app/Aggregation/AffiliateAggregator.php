@@ -78,7 +78,7 @@ class AffiliateAggregator implements AggregatorInterface
     {
         DB::table($this->aggregation_table)->truncate();
         foreach ($this->affiliates as $affiliate) {
-        DB::table($this->aggregation_table)->insert(['affiliate_id'=>$affiliate->affiliate_id, 'revenue'=>$affiliate->revenue]);
+            DB::table($this->aggregation_table)->insert(['affiliate_id'=>$affiliate->affiliate_id, 'revenue'=>$affiliate->revenue]);
         }
     }
 
