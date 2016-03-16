@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>Class App\Aggregation\TransactionAggregator</title>
+
+	<link rel="stylesheet" href="resources/style.css?e99947befd7bf673c6b43ff75e9e0f170c88a60e">
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+				<h3>Namespaces</h3>
+			<ul>
+				<li class="active">
+					<a href="namespace-App.html">
+						App<span></span>
+					</a>
+
+						<ul>
+				<li class="active">
+					<a href="namespace-App.Aggregation.html">
+						Aggregation					</a>
+
+						</li>
+							</ul></li>
+			</ul>
+		</div>
+
+		<hr>
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-App.Aggregation.AffiliateAggregator.html">AffiliateAggregator</a></li>
+				<li><a href="class-App.Aggregation.Dispatcher.html">Dispatcher</a></li>
+				<li class="active"><a href="class-App.Aggregation.TransactionAggregator.html">TransactionAggregator</a></li>
+			</ul>
+
+			<h3>Interfaces</h3>
+			<ul>
+				<li><a href="class-App.Aggregation.AggregatorInterface.html">AggregatorInterface</a></li>
+			</ul>
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="">
+		<input type="hidden" name="ie" value="UTF-8">
+		<input type="text" name="q" class="text" placeholder="Search">
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-App.Aggregation.html" title="Summary of App\Aggregation"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class TransactionAggregator</h1>
+
+
+
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-App.html">App</a>\<a href="namespace-App.Aggregation.html">Aggregation</a><br>
+		
+
+			<b>Located at</b> <a href="source-class-App.Aggregation.TransactionAggregator.html#8-219" title="Go to source code">TransactionAggregator.php</a>
+		<br>
+	</div>
+
+
+
+	<table class="summary methods" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="setSourceTable" id="_setSourceTable">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setSourceTable">#</a>
+		<code><a href="source-class-App.Aggregation.TransactionAggregator.html#67-78" title="Go to source code">setSourceTable</a>( <span>string <var>$table</var></span>, <span>string <var>$year</var> = <span class="php-quote">''</span></span>, <span>string <var>$month</var> = <span class="php-quote">''</span></span> )</code>
+
+		<div class="description short">
+			<p>Set table where the data will be aggregated from.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Set table where the data will be aggregated from.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd></dd>
+					<dt><var>$year</var></dt>
+					<dd></dd>
+					<dt><var>$month</var></dt>
+					<dd></dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setAggregationTable" id="_setAggregationTable">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setAggregationTable">#</a>
+		<code><a href="source-class-App.Aggregation.TransactionAggregator.html#80-91" title="Go to source code">setAggregationTable</a>( <span>string <var>$table</var></span>, <span>string <var>$year</var> = <span class="php-quote">''</span></span>, <span>string <var>$month</var> = <span class="php-quote">''</span></span> )</code>
+
+		<div class="description short">
+			<p>Set the table where the data will be stored.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Set the table where the data will be stored.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd></dd>
+					<dt><var>$year</var></dt>
+					<dd></dd>
+					<dt><var>$month</var></dt>
+					<dd></dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getNewProcessedData" id="_getNewProcessedData">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getNewProcessedData">#</a>
+		<code><a href="source-class-App.Aggregation.TransactionAggregator.html#93-107" title="Go to source code">getNewProcessedData</a>( <span>integer <var>$day</var></span>, <span>integer <var>$month</var></span> )</code>
+
+		<div class="description short">
+			<p>Get new data (run at the beginning of the day).</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Get new data (run at the beginning of the day).</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$day</var></dt>
+					<dd></dd>
+					<dt><var>$month</var></dt>
+					<dd></dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getCurrentProcessedData" id="_getCurrentProcessedData">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getCurrentProcessedData">#</a>
+		<code><a href="source-class-App.Aggregation.TransactionAggregator.html#109-121" title="Go to source code">getCurrentProcessedData</a>( <span>integer <var>$transaction_id</var></span> )</code>
+
+		<div class="description short">
+			<p>Acquire latest data to be processed.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Acquire latest data to be processed.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$transaction_id</var></dt>
+					<dd></dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="updateAggregationTable" id="_updateAggregationTable">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_updateAggregationTable">#</a>
+		<code><a href="source-class-App.Aggregation.TransactionAggregator.html#166-180" title="Go to source code">updateAggregationTable</a>( <span>integer <var>$day</var></span>, <span>integer <var>$month</var></span> )</code>
+
+		<div class="description short">
+			<p>Update Aggregation table with relevant data.
+'updateAggregationSums' should be called first as updateAggregationAverages
+uses the information stored by calling updateAggregationSums.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Update Aggregation table with relevant data.
+'updateAggregationSums' should be called first as updateAggregationAverages
+uses the information stored by calling updateAggregationSums.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$day</var></dt>
+					<dd></dd>
+					<dt><var>$month</var></dt>
+					<dd></dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="parseResults" id="_parseResults">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_parseResults">#</a>
+		<code><a href="source-class-App.Aggregation.TransactionAggregator.html#209-218" title="Go to source code">parseResults</a>( <span>array <var>$transactions</var></span> )</code>
+
+		<div class="description short">
+			<p>Used to parse results to the correct format.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Used to parse results to the correct format.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$transactions</var></dt>
+					<dd></dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		 API documentation generated by <a href="http://apigen.org">ApiGen</a>
+	</div>
+</div>
+</div>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
+</body>
+</html>

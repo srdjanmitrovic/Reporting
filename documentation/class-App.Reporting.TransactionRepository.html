@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+
+	<title>Class App\Reporting\TransactionRepository</title>
+
+	<link rel="stylesheet" href="resources/style.css?e99947befd7bf673c6b43ff75e9e0f170c88a60e">
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+				<h3>Namespaces</h3>
+			<ul>
+				<li class="active">
+					<a href="namespace-App.html">
+						App<span></span>
+					</a>
+
+						<ul>
+				<li class="active">
+					<a href="namespace-App.Reporting.html">
+						Reporting					</a>
+
+						</li>
+							</ul></li>
+			</ul>
+		</div>
+
+		<hr>
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-App.Reporting.AffiliateRepository.html">AffiliateRepository</a></li>
+				<li><a href="class-App.Reporting.NetworkReport.html">NetworkReport</a></li>
+				<li><a href="class-App.Reporting.ReportAggregator.html">ReportAggregator</a></li>
+				<li><a href="class-App.Reporting.RepositoryFactory.html">RepositoryFactory</a></li>
+				<li class="active"><a href="class-App.Reporting.TransactionRepository.html">TransactionRepository</a></li>
+			</ul>
+
+			<h3>Interfaces</h3>
+			<ul>
+				<li><a href="class-App.Reporting.RepositoryInterface.html">RepositoryInterface</a></li>
+			</ul>
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="">
+		<input type="hidden" name="ie" value="UTF-8">
+		<input type="text" name="q" class="text" placeholder="Search">
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-App.Reporting.html" title="Summary of App\Reporting"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class TransactionRepository</h1>
+
+
+	<div class="description">
+	<p>Used to generate the transaction statistics based on the relative metrics</p>
+	</div>
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+<b><span>App\Reporting\TransactionRepository</span></b>			
+			 implements 
+				<a href="class-App.Reporting.RepositoryInterface.html"><span>App\Reporting\RepositoryInterface</span></a>
+			
+			
+		</dd>
+	</dl>
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-App.html">App</a>\<a href="namespace-App.Reporting.html">Reporting</a><br>
+		
+
+			<b>Located at</b> <a href="source-class-App.Reporting.TransactionRepository.html#7-91" title="Go to source code">TransactionRepository.php</a>
+		<br>
+	</div>
+
+
+
+	<table class="summary methods" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+
+		<td class="attributes"><code>
+			 public 
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___construct">#</a>
+		<code><a href="source-class-App.Reporting.TransactionRepository.html#41-49" title="Go to source code">__construct</a>( <span>array <var>$date</var></span> )</code>
+
+		<div class="description short">
+			<p>Create new instance of the TransactionRepository.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Create new instance of the TransactionRepository.</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$date</var></dt>
+					<dd></dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getDailyStatistics" id="_getDailyStatistics">
+
+		<td class="attributes"><code>
+			 public 
+
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getDailyStatistics">#</a>
+		<code><a href="source-class-App.Reporting.TransactionRepository.html#51-65" title="Go to source code">getDailyStatistics</a>( )</code>
+
+		<div class="description short">
+			<p>Get transaction data for given day.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Get transaction data for given day.</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					array
+				</div>
+
+
+
+
+				<h4>Implementation of</h4>
+				<div class="list"><code><a href="class-App.Reporting.RepositoryInterface.html#_getDailyStatistics">App\Reporting\RepositoryInterface::getDailyStatistics()</a></code></div>
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getMonthlyStatistics" id="_getMonthlyStatistics">
+
+		<td class="attributes"><code>
+			 public 
+
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getMonthlyStatistics">#</a>
+		<code><a href="source-class-App.Reporting.TransactionRepository.html#67-80" title="Go to source code">getMonthlyStatistics</a>( )</code>
+
+		<div class="description short">
+			<p>Get transaction data for given month.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Get transaction data for given month.</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					array
+				</div>
+
+
+
+
+				<h4>Implementation of</h4>
+				<div class="list"><code><a href="class-App.Reporting.RepositoryInterface.html#_getMonthlyStatistics">App\Reporting\RepositoryInterface::getMonthlyStatistics()</a></code></div>
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getYearlyStatistics" id="_getYearlyStatistics">
+
+		<td class="attributes"><code>
+			 public 
+
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getYearlyStatistics">#</a>
+		<code><a href="source-class-App.Reporting.TransactionRepository.html#82-90" title="Go to source code">getYearlyStatistics</a>( )</code>
+
+		<div class="description short">
+			<p>Get transaction data for given year.</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Get transaction data for given year.</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					string
+				</div>
+
+
+
+
+				<h4>Implementation of</h4>
+				<div class="list"><code><a href="class-App.Reporting.RepositoryInterface.html#_getYearlyStatistics">App\Reporting\RepositoryInterface::getYearlyStatistics()</a></code></div>
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+	<table class="summary properties" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="timestamps" id="$timestamps">
+		<td class="attributes"><code>
+			public  
+			boolean
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-App.Reporting.TransactionRepository.html#13-17" title="Go to source code"><var>$timestamps</var></a>
+
+			<div class="description short">
+				<p>Set timestamps to False (True by default).</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Set timestamps to False (True by default).</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$timestamps" class="anchor">#</a>
+				<code><span class="php-keyword1">False</span></code>
+			</div>
+		</td>
+	</tr>
+	<tr data-order="date" id="$date">
+		<td class="attributes"><code>
+			public  
+			string
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-App.Reporting.TransactionRepository.html#34-39" title="Go to source code"><var>$date</var></a>
+
+			<div class="description short">
+				<p>Day of report.</p>
+			</div>
+
+			<div class="description detailed hidden">
+				<p>Day of report.</p>
+
+			</div>
+		</td>
+		<td class="value">
+			<div>
+				<a href="#$date" class="anchor">#</a>
+				<code></code>
+			</div>
+		</td>
+	</tr>
+	</table>
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		 API documentation generated by <a href="http://apigen.org">ApiGen</a>
+	</div>
+</div>
+</div>
+<script src="resources/combined.js?cd021bc814832c24a7cec5319ea03335bfba1caf"></script>
+<script src="elementlist.js?50fcb26d7b01cdf0175802669fed6c9075b0ec5a"></script>
+</body>
+</html>
