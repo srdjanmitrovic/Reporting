@@ -22,13 +22,13 @@ class ReportAggregator
 	{
 		$transaction_count = $values['transaction_count'];
 		if ($transaction_count == 0) {
-			foreach($values as $key=>$value){
+			foreach ($values as $key=>$value) {
 				$averageValue = 0;
 				$values[$key.'_average'] = 0; 
 			}
 			return $values;
 		}
-		foreach($values as $key=>$value){
+		foreach ($values as $key=>$value) {
 			$averageValue = (int)$value/$transaction_count;
 			$values[$key.'_average'] = $averageValue; 
 		}
@@ -44,10 +44,10 @@ class ReportAggregator
 	 */
 	public function aggregateMultipleColumns($values)
 	{
-		foreach($values as $key=>$value){
-			if(empty($value)){
+		foreach ($values as $key=>$value) {
+			if (empty($value)) {
 				$values[$key] = 0;
-			}else{
+			} else {
 				$values[$key] = reset($value[0]);
 			}
 		}

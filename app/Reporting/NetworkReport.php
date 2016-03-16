@@ -45,7 +45,7 @@ class NetworkReport
 		$monthlyStatistics = $transactionRepository->getMonthlyStatistics();
 
 		$dailyStatistics = $this->aggregator->aggregateMultipleColumns($dailyStatistics);
-		$monthlyStatistics = $this->aggregator->aggregateAverage($monthlyStatistics);
+		$monthlyStatistics 	= $this->aggregator->aggregateAverage($monthlyStatistics);
 
 		$affiliateRepository->setLimit(5);
 		$monthlyAffiliateStatistics = $affiliateRepository->getMonthlyStatistics();

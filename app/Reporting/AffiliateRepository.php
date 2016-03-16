@@ -38,7 +38,7 @@ class AffiliateRepository implements RepositoryInterface
 	/**
 	 * Set number of affiliates to receive.
 	 * 
-	 * @param [type] $limit [description]
+	 * @param int $limit
 	 */
 	public function setLimit($limit)
 	{
@@ -62,7 +62,11 @@ class AffiliateRepository implements RepositoryInterface
      */
 	public function getMonthlyStatistics()
 	{
-        $affiliates[$this->columns['monthly'][0]] = DB::table($this->aggregated_table)->select($this->columns['monthly'][0])->orderBy('revenue','desc')->take($this->limit)->get();
+        $affiliates[$this->columns['monthly'][0]] = DB::table($this->aggregated_table)->select($this->columns['monthly'][0])
+        																			  ->orderBy('revenue','desc')
+        																			  ->take($this->limit)
+        																			  ->get();
+
         $affiliates = $this->getAffiliateDetails($affiliates);
         return $affiliates;
 	}
@@ -85,8 +89,10 @@ class AffiliateRepository implements RepositoryInterface
 	 */
 	public function getAffiliateDetails($affiliates)
 	{
-		foreach(reset($affiliates) as $affiliate){
-        	array_push($affiliates, DB::table($this->source_table)->select('affiliate_id','website', 'company')->where('affiliate_id', '=', $affiliate->affiliate_id)->get());
+		foreach (reset($affiliates) as $affiliate) {
+        	array_push($affiliates, DB::table($this->source_table)->select('affiliate_id','website', 'company')
+        														  ->where('affiliate_id', '=', $affiliate->affiliate_id)
+        														  ->get());
         }
      	array_shift($affiliates);
         return $affiliates;

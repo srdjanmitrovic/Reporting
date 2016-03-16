@@ -28,7 +28,8 @@ class TransactionRepository implements RepositoryInterface
      *
      * @var array 
      */
-    private $columns = array('daily'=>array('transaction_count', 'commission_sum','sale_sum','sale_average','commission_average'), 'monthly'=>array('transaction_count', 'commission_sum','sale_sum'));
+    private $columns = array('daily'=>array('transaction_count', 'commission_sum','sale_sum','sale_average','commission_average'), 
+                             'monthly'=>array('transaction_count', 'commission_sum','sale_sum'));
 
     /**
      * Day of report.
@@ -54,8 +55,11 @@ class TransactionRepository implements RepositoryInterface
      */
     public function getDailyStatistics()
     {
-        foreach($this->columns['daily'] as $column){
-            $dailyStatistics[$column] = DB::table($this->aggregated_table)->select($column)->where('day','=',$this->date['day'])->where('month','=', $this->date['month'])->get();
+        foreach ($this->columns['daily'] as $column) {
+            $dailyStatistics[$column] = DB::table($this->aggregated_table)->select($column)
+                                                                          ->where('day','=',$this->date['day'])
+                                                                          ->where('month','=', $this->date['month'])
+                                                                          ->get();
         }
         return $dailyStatistics;
     }
@@ -67,8 +71,10 @@ class TransactionRepository implements RepositoryInterface
      */
     public function getMonthlyStatistics()
     {
-        foreach($this->columns['monthly'] as $column){
-            $monthlyStatistics[$column] = DB::table($this->aggregated_table)->where('month', '=', $this->date['month'])->whereBetween('day', array(1,$this->date['day']))->sum($column);
+        foreach ($this->columns['monthly'] as $column) {
+            $monthlyStatistics[$column] = DB::table($this->aggregated_table)->where('month', '=', $this->date['month'])
+                                                                            ->whereBetween('day', array(1,$this->date['day']))
+                                                                            ->sum($column);
         }
         return $monthlyStatistics;
     }

@@ -30,9 +30,9 @@ class AffiliateAggregator implements AggregatorInterface
      * @param  string $year
      * @return void
      */
-    public function setSourceTable($table, $month = '', $year = '')
+    public function setSourceTable($table, $year = '', $month = '')
     {
-        $this->source_table = $table.$year.$month;
+        $this->source_table = $table . $year . $month;
     }
 
     /**
@@ -43,9 +43,9 @@ class AffiliateAggregator implements AggregatorInterface
      * @param  string $year
      * @return void
      */
-    public function setAggregationTable($table, $month = '', $year = '')
+    public function setAggregationTable($table, $year = '', $month = '')
     {
-        $this->aggregation_table = $table.$year.$month;
+        $this->aggregation_table = $table . $year . $month;
     }    
 
     /**
@@ -59,17 +59,6 @@ class AffiliateAggregator implements AggregatorInterface
     }
 
     /**
-     * Parse results to be able to update the relevant aggregation table.
-     * 
-     * @param  array $affiliates 
-     * @return void
-     */
-    public function parseResults($affiliates)
-    {
-
-    }
-
-    /**
      * Update relevenat aggregation table.
      * 
      * @return void
@@ -78,8 +67,20 @@ class AffiliateAggregator implements AggregatorInterface
     {
         DB::table($this->aggregation_table)->truncate();
         foreach ($this->affiliates as $affiliate) {
-            DB::table($this->aggregation_table)->insert(['affiliate_id'=>$affiliate->affiliate_id, 'revenue'=>$affiliate->revenue]);
+            DB::table($this->aggregation_table)->insert(['affiliate_id'=>$affiliate->affiliate_id, 
+                                                         'revenue'     =>$affiliate->revenue]);
         }
+    }
+
+    /**
+     * Parse results to be able to update the relevant aggregation table.
+     * 
+     * @param  array $affiliates 
+     * @return void
+     */
+    public function parseResults($affiliates)
+    {
+
     }
 
 }

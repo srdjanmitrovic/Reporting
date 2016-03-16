@@ -24,20 +24,17 @@
 |
 */
 
-// Route::group(['middleware' => ['web']], function () {
-// 	//
-// });
-
 Route::group(['middleware' => 'web'], function () {
-    // Route::auth();
 
     // Authentication routes...
-	Route::get('/login', 'Auth\AuthController@showLoginForm');
+	Route::get ('/login', 'Auth\AuthController@showLoginForm');
 	Route::post('/login', 'Auth\AuthController@login');
-	Route::get('/logout', 'Auth\AuthController@logout');
+	Route::get ('/logout', 'Auth\AuthController@logout');
 
-    Route::get('/home', 'HomeController@index');
+    Route::get ('/home', 'HomeController@index');
     Route::post('/home','HomeController@index');
     
-    Route::get('/', function () {return view('welcome');});
+    Route::get ('/', function () {
+    	return view('welcome');
+    });
 });

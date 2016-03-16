@@ -29,10 +29,8 @@ class HomeController extends Controller
     public function __construct(Request $request, DateProcessor $dateProcessor)
     {
         $this->middleware('auth');
-        $this->date     = $dateProcessor->validate(array(
-            'day' => $request->day,
-            'month' => $request->month
-        ));
+        $this->date     = $dateProcessor->validate(array('day'   => $request->day,
+                                                         'month' => $request->month));
     }
 
     /**
@@ -43,6 +41,7 @@ class HomeController extends Controller
     public function index(NetworkReport $report)
     {
         $reportData = $report->getReport($this->date);
-        return view('/home')->with('reportData', $reportData)->with('day', $this->date['day']);
+        return view('/home')->with('reportData', $reportData)
+                            ->with('day', $this->date['day']);
     }
 }

@@ -22,8 +22,7 @@ class DateProcessor
      */
     public function validate($date)
     {
-        foreach ($date as $key => $value) 
-        {
+        foreach ($date as $key => $value) {
             $value = intval($value); 
             if ($key == 'day' && ($value == 0 || $value > 31)) $date[$key] = date('d');
             if ($key == 'day' && ($value == 0 || $value > 12)) $date[$key] = date('m');
