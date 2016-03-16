@@ -29,7 +29,7 @@ class Dispatcher
     public function __construct(Logger $logger)
     {   
         $this->date = explode('-', date('Y-m-d'));
-        $this->date = array('2016', '03', '01');
+        // $this->date = array('2016', '03', '01');
         $this->logger = $logger;
     }
 
